@@ -2,6 +2,8 @@
 
 This repository provisions the infrastructure required to run the `hx-app` Python application on **AWS ECS Fargate**.
 
+Check out the [live demo](http://hx-app-alb-2127162870.ap-southeast-2.elb.amazonaws.com/hello).
+
 ---
 
 ## 🔧 What It Creates
