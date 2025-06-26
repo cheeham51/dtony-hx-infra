@@ -76,9 +76,9 @@ resource "aws_iam_role" "ecs_exec" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
-      Effect = "Allow",
+      Effect    = "Allow",
       Principal = { Service = "ecs-tasks.amazonaws.com" },
-      Action = "sts:AssumeRole"
+      Action    = "sts:AssumeRole"
     }]
   })
 }
@@ -131,7 +131,7 @@ resource "aws_ecs_service" "app" {
   }
 
   lifecycle {
-    ignore_changes = [task_definition] # So GitHub Actions can update this
+    ignore_changes = [task_definition]
   }
 
   depends_on = [aws_iam_role_policy_attachment.ecs_exec_attach]

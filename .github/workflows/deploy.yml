@@ -29,9 +29,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
-
       - name: Terraform Validate
         run: terraform validate
 
