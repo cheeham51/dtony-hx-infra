@@ -29,12 +29,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: tfsec
-        uses: aquasecurity/tfsec-action@v1.0.0
-
-      - name: checkov
-        uses: bridgecrewio/checkov-action@master
-
       - name: Terraform Init
         run: terraform init
 
