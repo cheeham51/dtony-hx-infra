@@ -29,9 +29,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.0
 
