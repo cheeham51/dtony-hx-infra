@@ -104,7 +104,7 @@ resource "aws_ecs_task_definition" "bootstrap" {
 
   container_definitions = jsonencode([
     {
-      name      = hx-app,
+      name      = "hx-app",
       image     = "amazon/amazon-ecs-sample",
       essential = true,
       portMappings = [
