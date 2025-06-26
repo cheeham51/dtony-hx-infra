@@ -194,7 +194,7 @@ resource "aws_lb_target_group" "app_tg" {
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
   health_check {
-    path                = "/hello"
+    path                = "/"
     matcher             = "200"
     interval            = 30
     timeout             = 5
