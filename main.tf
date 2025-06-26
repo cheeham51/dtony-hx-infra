@@ -2,9 +2,18 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "hx-app-infra-state"
+    key            = "hx-app.tfstate"
+    region         = "ap-southeast-2"
+    encrypt        = true
+  }
+}
+
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = "10.8.0.0/16"
   enable_dns_support   = true
   enable_dns_hostnames = true
 }
@@ -17,14 +26,14 @@ resource "aws_internet_gateway" "main" {
 # Public Subnets
 resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "10.8.1.0/24"
   availability_zone       = "ap-southeast-2a"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "public_b" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.2.0/24"
+  cidr_block              = "10.8.2.0/24"
   availability_zone       = "ap-southeast-2b"
   map_public_ip_on_launch = true
 }
@@ -51,7 +60,7 @@ resource "aws_route_table_association" "public_b" {
 
 # Security Group
 resource "aws_security_group" "ecs_sg" {
-  name   = "hx-app-sg"
+  name   = "hx-app-sg-a"
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -71,7 +80,7 @@ resource "aws_security_group" "ecs_sg" {
 
 # IAM Role for ECS execution
 resource "aws_iam_role" "ecs_exec" {
-  name = "hx-app-ecs-exec-role"
+  name = "hx-app-ecs-exec-role-a"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
